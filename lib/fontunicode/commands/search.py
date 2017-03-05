@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from __future__ import print_function
 import os
+import sys
 import sqlite3
-from Naked.toolshed.system import stderr, stdout
 
 # class UnicodeObject(object):
 #     def __init__(self, adobe_glyphtext, unicode_glyphtext):
@@ -67,11 +68,12 @@ def unicode_find(needle_list):
                     result_string = result[0] + "\t" + result[1] + " '" + result[2] + "'"
                 else:
                     result_string = result[0] + "\t'" + result[2] + "'"
-                stdout(result_string)
+                print(result_string)
             else:
-                stderr(needle + "\t" + "NOT FOUND")
+                print(needle + "\t" + "NOT FOUND", file=sys.stderr)
     except Exception as e:
-        stderr("[font-unicode]: Error: " + str(e), exit=1)
+        print("[font-unicode]: Error: " + str(e), file=sys.stderr)
+        raise SystemExit(1)
     finally:
         if con:
             con.close()
@@ -92,11 +94,11 @@ def name_find(name_list):
 
             if len(result_list) > 0:
                 for result in result_list:
-                    stdout("'" + needle + "' ==> " + result[0] + " '" + result[2] + "'")
+                    print("'" + needle + "' ==> " + result[0] + " '" + result[2] + "'")
             else:
-                stderr("[X] " + needle)
+                print("[X] " + needle, file=sys.stderr)
     except Exception as e:
-        stderr("[font-unicode] Error: " + str(e), exit=1)
+        print("[font-unicode] Error: " + str(e), exit=1, file=sys.stderr)
     finally:
         if con:
             con.close()
