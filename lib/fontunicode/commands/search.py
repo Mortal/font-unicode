@@ -98,7 +98,8 @@ def name_find(name_list):
             else:
                 print("[X] " + needle, file=sys.stderr)
     except Exception as e:
-        print("[font-unicode] Error: " + str(e), exit=1, file=sys.stderr)
+        print("[font-unicode] Error: " + str(e), file=sys.stderr)
+        raise SystemExit(1)
     finally:
         if con:
             con.close()
